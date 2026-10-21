@@ -5,10 +5,8 @@
 ## 安装
 
 ```bash
-npx -y skills add <aidanking11adk-uxkinetic-tech-vertical -g --all
+npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 ```
-
-把 `<your-gaidanking11adk-ux所有者。
 
 ## 使用
 

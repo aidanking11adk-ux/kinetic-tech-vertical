@@ -5,10 +5,10 @@
 ## 安装
 
 ```bash
-npx -y skills add <your-github-username>/kinetic-tech-vertical -g --all
+npx -y skills add <aidanking11adk-uxkinetic-tech-vertical -g --all
 ```
 
-把 `<your-github-username>` 替换为仓库所有者。
+把 `<your-gaidanking11adk-ux所有者。
 
 ## 使用
 

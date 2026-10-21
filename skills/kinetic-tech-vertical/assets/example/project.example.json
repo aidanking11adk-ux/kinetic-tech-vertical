@@ -1,0 +1,9 @@
+{
+  "root": "/ABS/PATH/TO/WORKDIR",
+  "out": "/ABS/PATH/TO/WORKDIR/out/final-silent.mp4",
+  "index": "index.html",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "frames": 1477
+}

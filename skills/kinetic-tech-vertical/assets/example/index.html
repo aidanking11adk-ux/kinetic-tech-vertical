@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>律所 · 谅解书 · Kinetic Tech</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <img id="base" alt="">
+  <div id="videoTint"></div>
+
+  <section id="ins1" class="insert">
+    <div class="ins-bg"></div>
+    <div class="ins-grid"></div>
+    <div class="ins-glow"></div>
+    <div class="ins-vig"></div>
+    <div class="ins-head">
+      <div class="badge" id="ins1-badge">FACTORS / 01</div>
+      <h2 class="metal" id="ins1-title">具体作用</h2>
+      <p id="ins1-sub">看四件事，不是一句“没事”</p>
+    </div>
+    <div class="grid4">
+      <div class="fcard" id="fc1">
+        <div class="fnum">01</div>
+        <div class="ft metal">案件性质</div>
+        <div class="fs">不同罪名，评价不同</div>
+      </div>
+      <div class="fcard acc-gold" id="fc2">
+        <div class="fnum gold">02</div>
+        <div class="ft metal">造成的后果</div>
+        <div class="fs">伤情、损失、社会影响</div>
+      </div>
+      <div class="fcard" id="fc3">
+        <div class="fnum">03</div>
+        <div class="ft metal">当事人行为</div>
+        <div class="fs">认罪、悔罪、赔偿</div>
+      </div>
+      <div class="fcard acc-gold" id="fc4">
+        <div class="fnum gold">04</div>
+        <div class="ft metal">其他量刑情节</div>
+        <div class="fs">自首、立功、前科</div>
+      </div>
+    </div>
+    <div class="ins-foot" id="ins1-foot">作用大小，要结合具体案情判断</div>
+  </section>
+
+  <section id="ins2" class="insert">
+    <div class="ins-bg"></div>
+    <div class="ins-grid"></div>
+    <div class="ins-glow gold-glow"></div>
+    <div class="ins-vig"></div>
+    <div class="ins-head">
+      <div class="badge" id="ins2-badge">CHECK / 02</div>
+      <h2 class="metal" id="ins2-title">先核对三件事</h2>
+      <p id="ins2-sub">拿到谅解书之后</p>
+    </div>
+    <div class="check" id="ck1">
+      <div class="cnum">01</div>
+      <div class="ctxt"><div class="ct metal">出具人是谁</div><div class="cs">是否真实、是否有权出具</div></div>
+    </div>
+    <div class="check" id="ck2">
+      <div class="cnum gold">02</div>
+      <div class="ctxt"><div class="ct metal">具体内容</div><div class="cs">写了什么、是否明确</div></div>
+    </div>
+    <div class="check" id="ck3">
+      <div class="cnum">03</div>
+      <div class="ctxt"><div class="ct metal">赔偿履行</div><div class="cs">赔了多少、凭证在哪</div></div>
+    </div>
+    <div class="ins-foot" id="ins2-foot">核对清楚，再谈提交</div>
+  </section>
+
+  <div id="warn">
+    <div class="warn-badge">注意</div>
+    <div class="warn-txt">
+      <div class="warn-t metal">谅解书绝对不能替代</div>
+      <div class="warn-s">对全案事实和证据的分析</div>
+    </div>
+  </div>
+
+  <div id="title">
+    <div class="tline" id="tl1"></div>
+    <div class="tline" id="tl2"></div>
+    <div class="title-rule"></div>
+  </div>
+
+  <section id="endcard">
+    <div class="end-bg"></div>
+    <div class="end-grid"></div>
+    <div class="end-glow"></div>
+    <div class="end-vig"></div>
+    <img class="end-logo" src="assets/logo-crop.png" alt="">
+    <div class="end-name metal">某某律师事务所</div>
+    <div class="end-sub">刑事辩护 · 家事纠纷</div>
+    <div class="end-line"></div>
+    <div class="end-cta">进行咨询</div>
+    <div class="end-note">YUNJIU LAW FIRM / CONSULTATION</div>
+  </section>
+
+  <img id="brand" src="assets/logo.png" alt="">
+
+  <div id="personbar">
+    <div class="pb-accent"></div>
+    <div class="pb-name">律师：{姓名}</div>
+    <div class="pb-id">律师证账号：{账号}</div>
+  </div>
+
+  <div id="hud">
+    <div class="corner tl"></div><div class="corner tr"></div>
+    <div class="corner bl"></div><div class="corner br"></div>
+    <div class="tc" id="tc">00:00:00:00</div>
+    <div class="hud-bl">YUNJIU / CRIMINAL</div>
+    <div class="ticks" id="ticks"></div>
+    <div id="rail"></div><div id="railDot"></div>
+  </div>
+
+  <div id="subs"><span class="subpanel"><span id="subtext"></span></span></div>
+  <canvas id="fx" width="1080" height="1920"></canvas>
+  <div id="grain"></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

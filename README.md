@@ -8,6 +8,8 @@
 npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 ```
 
+更完整的依赖、素材和第一条片流程见 [INSTALL.md](INSTALL.md)。
+
 ## 使用
 
 安装后，可以这样开始：
@@ -21,6 +23,7 @@ npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 - Node.js 18+ 与 `playwright-core`，以及本机 Chrome/Chromium
 - Whisper CLI + `ggml-large-v3`（可选，用于转写）
 - uv（可选，用于运行 `audio.py` 混音）
+- 运行时素材：`assets/runtime/` 已包含字体、颗粒和占位 Logo；发布前替换成律所自己的 Logo
 
 ## 隐私
 

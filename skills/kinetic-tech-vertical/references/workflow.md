@@ -119,11 +119,13 @@ scripts/build_base.py \
 
 ## 4. 包装层
 
-复制模板：
+在 workdir 运行 bootstrap（目录已有 media/asr/base 时加 `--force`；脚本只复制，不删除）：
 
 ```bash
-cp -R assets/example/* "<workdir>/"
+scripts/bootstrap_project.sh "<workdir>" --force
 ```
+
+脚本会复制示例和 `assets/runtime/` 的字体、颗粒、占位 Logo，并安装 `playwright-core`。把 `assets/logo.png` 和 `assets/logo-crop.png` 换成律所自己的；不要把真实品牌、律师姓名或证号提交到公开仓库。
 
 模板包含：
 

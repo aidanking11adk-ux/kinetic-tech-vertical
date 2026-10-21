@@ -27,11 +27,15 @@ description: 把律所竖屏口播原片做成 Kinetic Tech（酷炫科技风）
 1. 预处理：`scripts/prepare_source.sh <源片> <workdir>`
 2. 转写：`scripts/transcribe.sh <workdir>/audio-16k.wav <workdir>/asr`
 3. 建剪口：写 `keeps.json`（`[{"start":3.35,"duration":37.58}, ...]`），运行 `scripts/build_base.py`
-4. 包装：复制 `assets/example/` 的 `index.html`、`style.css`、`app.js`，按文案替换标题、字幕、卡片和人物条；规则见 `references/design-system.md`
+4. 包装：运行 `scripts/bootstrap_project.sh <project>`（复制示例和 `assets/runtime/` 素材），按文案替换标题、字幕、卡片和人物条；规则见 `references/design-system.md`
 5. 渲染：写 `project.json`，运行 `scripts/render.mjs --project project.json`
 6. 混音：以 `assets/example/audio.py` 为底改事件时间；或保留原声直接 mux
 7. 验收：`scripts/qa.sh <成片> <qa目录>`，对照 `references/qa-checklist.md`
 8. 交付：MP4、SRT、封面、画面抽查、人员确认、剪辑说明
+
+## 运行素材
+
+`assets/runtime/` 已包含 Noto Sans SC、Geist/Geist Mono、grain、占位 `logo.png`/`logo-crop.png` 和许可证。`scripts/bootstrap_project.sh` 会把它们复制到项目 `assets/`。占位 Logo 必须换成律所自己的；许可证在 `assets/runtime/`。
 
 ## 版式要点
 

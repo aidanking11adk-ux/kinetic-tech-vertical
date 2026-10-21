@@ -28,9 +28,9 @@
 4. `audio.py`
    - 事件时间与新剪口对齐；响度目标 -14.5 ~ -14.8 LUFS。
 
-## 需要的 assets
+## 运行时素材
 
-工作目录下 `assets/` 至少包含：
+Skill 的 `assets/runtime/` 已包含：
 
 ```text
 NotoSansSC.ttf
@@ -39,11 +39,13 @@ Geist-normal-700.woff2
 GeistMono-normal-400.woff2
 GeistMono-normal-500.woff2
 grain.png
-logo.png        # 全屏透明 PNG，左上角已排好
-logo-crop.png   # 片尾居中用，460×165
+logo.png        # 全屏透明占位 PNG，左上角已排好
+logo-crop.png   # 片尾居中占位图，460×165
+OFL-*.txt       # 字体/模板许可证
 ```
 
-从已验收工作目录复制，或从项目的 `品牌素材/` 取最新 Logo。
+用 `scripts/bootstrap_project.sh <project>` 初始化项目时，这些文件会自动复制到项目的 `assets/`。
+发布客户视频前，把 `logo.png` / `logo-crop.png` 换成律所自己的 Logo；不要把真实律师姓名、执业证账号或未授权品牌素材提交到公开仓库。
 字体是 OFL；不要替换成未授权字体。
 
 ## 时间轴

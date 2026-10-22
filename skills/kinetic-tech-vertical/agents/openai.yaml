@@ -1,4 +1,4 @@
 interface:
   display_name: "kinetic-tech-vertical"
-  short_description: "律所竖屏口播原片 → Kinetic Tech 1080×1920 成片：HDR→SDR、语义剪口、科技字幕、人名条、卡片、验收"
+  short_description: "律所竖屏口播 → Kinetic Tech 成片：HDR→SDR、剪口、字幕、人名条、卡片、眼袋修饰"
   default_prompt: "使用 $kinetic-tech-vertical 把这条律所口播原片剪成 Kinetic Tech 竖屏成片，并完成抽帧和音频验收。"

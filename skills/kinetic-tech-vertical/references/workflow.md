@@ -147,6 +147,8 @@ scripts/bootstrap_project.sh "<workdir>" --force
 
 ### 人物条
 
+有证律师：
+
 ```html
 <div id="personbar">
   <div class="pb-accent"></div>
@@ -155,11 +157,22 @@ scripts/bootstrap_project.sh "<workdir>" --force
 </div>
 ```
 
+无证实习律师（不展示证号，底框收窄）：
+
+```html
+<div id="personbar">
+  <div class="pb-accent"></div>
+  <div class="pb-name">律师：{姓名}</div>
+  <div class="pb-id"><span class="pb-dot"></span>实习律师</div>
+</div>
+```
+
 CSS 要点：
 
-- `width:540px; height:auto; padding:16px 24px 14px 26px;`
+- 有证律师 `width:540px`；无证实习律师 `width:360px`，底框贴着文字，不要留大空白；
+- `height:auto; padding:16px 24px 14px 28px;`
 - `display:flex; flex-direction:column; justify-content:center; gap:12px;`
-- 姓名 40px / 账号 28px；
+- 姓名 40–44px / 第二行 28px；
 - 严格两行，不换第三行；账号按字符串原样保留；
 - 整屏卡和片尾隐藏，前后 0.2 秒淡出/淡入。
 
@@ -191,6 +204,47 @@ CSS 要点：
 
 只在 `.insert` 和 `#endcard` 内加 `.ins-vig` / `.end-vig`。
 人物画面保持干净，只保留美颜。
+
+### 眼下修饰（戴眼镜/眼袋）
+
+**为什么全局磨皮不够**：眼袋是低频的结构性阴影，不是高频皮肤纹理。双边滤波只磨纹理，还会保护镜框、镜片和泪沟这些强边缘；轻锐化会增强泪沟边界；全局提亮后周围皮肤变亮，眼袋反而更明显。
+
+先用项目的美颜链生成 `base/frames-beauty*`，再跑逐帧眼下修饰：
+
+```bash
+python3 scripts/undereye.py \
+  --src base/frames-beauty \
+  --dst base/frames-beauty-undereye \
+  --level full
+
+# 系统 Python 没有 OpenCV 时：
+uv run --with opencv-python-headless --with numpy \
+  python scripts/undereye.py --src base/frames-beauty --dst base/frames-beauty-undereye --level full
+```
+
+两档参数：
+
+| 档位 | 蒙版 | 低频压平 | 提亮 | 降饱和 a/b | 效果 |
+|---|---|---|---|---|---|
+| `natural` | 0.155w × 0.067h | 50% | 22% | 18% / 12% | 日常修饰，保留少量结构 |
+| `full` | 0.165w × 0.078h | 96% | 30% | 32% / 20% | 完全抹平眼袋，适合用户明确要求“完全抹平” |
+
+实现要点：
+
+- 逐帧 Haar 人脸定位，取最大人脸框；人脸框按 `0.35 × 新框 + 0.65 × 旧框` 平滑；
+- 镜头切换/人脸大跳（中心位移 > 9% 脸宽或宽度变化 > 7%）时立即重置到新框；
+- 两个眼下椭圆分别位于脸框 `x+0.319w`、`x+0.687w`，`y+0.513h`；
+- 蒙版用 `max(6, 0.030w)` 羽化，避开镜框下沿；
+- L 通道做低频压平 + 提亮，a/b 向中性降饱和；镜框和镜片保持清晰；
+- 只处理人物帧；整屏卡、片尾不需要。
+
+跑完后把 `app.js` 的 `base.src` 改成新目录，再渲染：
+
+```js
+base.src = `base/frames-beauty-undereye/${String(i + 1).padStart(5, '0')}.jpg`;
+```
+
+验收时抽 3–5 个人物帧放大眼下：眼袋应消失或明显减轻，镜框下沿不能发虚，脸颊不能出现蒙版边。`full` 档会牺牲一点眼下结构，看起来更“平”，这是用户要求“完全抹平”时的预期取舍。
 
 ## 5. 渲染
 

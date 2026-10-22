@@ -63,6 +63,11 @@ check "ffmpeg" ffmpeg
 check "ffprobe" ffprobe
 check "uv (audio.py)" uv
 check "whisper-cli (optional)" whisper-cli
+if python3 -c 'import cv2' >/dev/null 2>&1; then
+  echo "OK    OpenCV (undereye)"
+else
+  echo "MISS  OpenCV (undereye; python3 -m pip install opencv-python-headless numpy)"
+fi
 if [[ -x "/usr/bin/avconvert" ]]; then echo "OK    avconvert (macOS HDR)"; else echo "MISS  avconvert (macOS HDR; other platforms need zscale/tonemap)"; fi
 if [[ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" || -x "/Applications/Chromium.app/Contents/MacOS/Chromium" ]]; then
   echo "OK    Chrome/Chromium"

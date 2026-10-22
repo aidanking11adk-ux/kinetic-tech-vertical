@@ -21,6 +21,7 @@ npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 | uv | 运行 `audio.py` 混音 | 可选；不加音效时不需要 |
 | whisper-cli + `ggml-large-v3` | 本地转写 | 可选；模型约 3GB，设置 `WHISPER_MODEL` |
 | Python 3.11+ | `adapter`/脚本 | `build_base.py` 用系统 Python 即可 |
+| Python + OpenCV + numpy | 戴眼镜/眼袋的眼下局部修饰 | `scripts/undereye.py`；`python3 -m pip install opencv-python-headless numpy` 或 `uv run --with ...` |
 
 ## 3. 初始化项目
 
@@ -34,7 +35,7 @@ bash ~/.agents/skills/kinetic-tech-vertical/scripts/bootstrap_project.sh "$HOME/
 - 复制示例 `index.html`、`style.css`、`app.js`、`audio.py`；
 - 从 Skill 的 `assets/runtime/` 复制 Noto Sans SC、Geist/Geist Mono、grain、占位 Logo；
 - 生成 `project.json`；
-- 检查 node/npm/ffmpeg/ffprobe/uv/whisper/Chrome/avconvert；
+- 检查 node/npm/ffmpeg/ffprobe/uv/whisper/Chrome/avconvert/OpenCV；
 - 在项目里安装 `playwright-core`。
 
 项目目录非空时脚本会拒绝；确认要覆盖时加 `--force`。
@@ -56,6 +57,14 @@ cd "$HOME/Documents/kinetic-video"
   --keeps keeps.json \
   --out base/base-clean.mp4 \
   --frames base/frames
+
+# 3.5) 戴眼镜/眼袋明显：先生成美颜帧，再做逐帧眼下局部修饰
+#      （full = 完全抹平；natural = 保留少量结构）
+python3 ~/.agents/skills/kinetic-tech-vertical/scripts/undereye.py \
+  --src base/frames-beauty \
+  --dst base/frames-beauty-undereye \
+  --level full
+# 然后把 app.js 的 base.src 指到 base/frames-beauty-undereye/
 
 # 4) 把 app.js 的 DURATION/BASE_COUNT 和 project.json 的 frames
 #    改成 build_base.py 的实际输出
@@ -92,6 +101,7 @@ ffmpeg -i out/silent.mp4 -i out/mix.wav -map 0:v:0 -map 1:a:0 \
 
 - 输出是渲染好的 MP4；**不是剪映原生可编辑草稿**，也不包含剪映原生 8 项皮肤管理。软件美颜只是近似。
 - HDR/HLG 必须先转 SDR BT.709；否则黑位抬高、颜色发灰。
+- 戴眼镜时全局磨皮会保留镜框、镜片和泪沟边缘，眼袋磨不掉；用 `scripts/undereye.py` 做逐帧眼下蒙版。`full` 会把眼下结构一起抹平，适合用户明确要求“完全抹平”的场景。
 - 每条新片都要重新确认律师姓名/证号，重新转写、剪口、写卡片和排时间轴；示例内容是「谅解书」，不是通用文案。
 - 目前只在 macOS / 本机 ZCode 上做过行为与安装验证；其他机器请先用一条 10 秒测试素材走通 HDR→预览→QA。
 

@@ -1,6 +1,6 @@
 # kinetic-tech-vertical
 
-把律所竖屏口播原片做成 Kinetic Tech（酷炫科技风）1080×1920 成片；处理 HDR/HLG→SDR、语义剪口、科技感字幕、人名条、整屏卡片与片尾，并完成渲染、混音和验收。当用户提供一条律所竖屏口播原片，要求按文案剪成 45–55 秒、保留律师出镜和原声、使用 Kinetic Tech 包装时使用；不适用于横屏、多机位或需要剪映原生草稿的任务。
+把律所竖屏口播原片做成 Kinetic Tech（酷炫科技风）1080×1920 成片；处理 HDR/HLG→SDR、语义剪口、科技感字幕、人名条、整屏卡片、戴眼镜/眼袋的眼下局部修饰与片尾，并完成渲染、混音和验收。当用户提供一条律所竖屏口播原片，要求按文案剪成 45–55 秒、保留律师出镜和原声、使用 Kinetic Tech 包装时使用；不适用于横屏、多机位或需要剪映原生草稿的任务。
 
 ## 安装
 
@@ -22,6 +22,7 @@ npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 - ffmpeg / ffprobe
 - Node.js 18+ 与 `playwright-core`，以及本机 Chrome/Chromium
 - Whisper CLI + `ggml-large-v3`（可选，用于转写）
+- Python + OpenCV + numpy（戴眼镜/眼袋的眼下局部修饰）
 - uv（可选，用于运行 `audio.py` 混音）
 - 运行时素材：`assets/runtime/` 已包含字体、颗粒和占位 Logo；发布前替换成律所自己的 Logo
 

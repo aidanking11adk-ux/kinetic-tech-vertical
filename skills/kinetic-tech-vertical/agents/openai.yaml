@@ -1,4 +1,4 @@
 interface:
   display_name: "kinetic-tech-vertical"
-  short_description: "律所竖屏口播 → Kinetic Tech 成片：HDR→SDR、剪口、字幕、人名条、卡片、眼袋修饰"
-  default_prompt: "使用 $kinetic-tech-vertical 把这条律所口播原片剪成 Kinetic Tech 竖屏成片，并完成抽帧和音频验收。"
+  short_description: "律师知识口播精剪与科技风包装，交付成片和可改文字并导出带音频视频的 HTML 修改器"
+  default_prompt: "使用 $kinetic-tech-vertical 按律师口播标准剪辑本次素材，确认人员信息，交付 MP4、匹配的 HTML 视频修改器及约定的原生草稿，并实际验证编辑、保存重开和带音频导出。"

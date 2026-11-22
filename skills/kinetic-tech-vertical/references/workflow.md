@@ -12,8 +12,9 @@ AGENTS.md
 项目内原生剪辑技能（如果存在）
 ```
 
-2. 按项目规则确认本次律师姓名、执业证账号、对应素材。不要沿用历史身份。
-3. 新建独立工作目录，例如：
+2. 按项目规则确认本次律师姓名、执业证账号、对应素材。不要沿用历史身份。同人一批确认一次，多人分别对应。不等待粗剪确认。
+3. 读 `delivery-and-editor.md` 和 `native-handoff.md`。从开工就保留干净底片、最终音轨和独立文字图层，确认原生依赖；不能到成片烧字后才寻找可编辑底片。
+4. 新建独立工作目录，例如：
 
 ```text
 work/<YYYYMMDD>-<任务名>/
@@ -87,7 +88,7 @@ scripts/transcribe.sh "<workdir>/audio-16k.wav" "<workdir>/asr"
 先找：
 
 - 开场静音：`silencedetect` 或第一段语音起点；
-- 句间长停顿（>0.6 秒）；
+- 句间长停顿（>0.6 秒可作为候选，复听后决定，不自动切断有语义的停顿）；
 - 结尾静音；
 - 重复、口误、无信息量的尾巴。
 
@@ -116,6 +117,7 @@ scripts/build_base.py \
 
 注意：剪口要按帧取整；`build_base.py` 输出几帧就以几帧为准，同步更新模板的 `DURATION` / `BASE_COUNT`。字幕时间必须通过同一组 keeps 映射，不能只改视频不改字幕。
 跨剪口的段要拆分：段前部属于前一段，段后部属于后一段。
+字幕先按完整句子和语义分段，再由逐词时间定位，不固定字数跨句、不整段均分。没有实际复听时保留待核状态。例片的 49.25 秒不是新片硬性时长。
 
 ## 4. 包装层
 
@@ -126,6 +128,7 @@ scripts/bootstrap_project.sh "<workdir>" --force
 ```
 
 脚本会复制示例和 `assets/runtime/` 的字体、颗粒、占位 Logo，并安装 `playwright-core`。把 `assets/logo.png` 和 `assets/logo-crop.png` 换成律所自己的；不要把真实品牌、律师姓名或证号提交到公开仓库。
+初始化还会复制 `delivery-checklist.json`，所有状态为 pending；刷新模板不会覆盖已有检查表。该表不能代替真实验收。
 
 模板包含：
 
@@ -277,7 +280,7 @@ node scripts/render.mjs --project project.json --preview --time 2.0
 
 ## 6. 混音
 
-保留原声，只加轻量机械音效：
+保留律师原声，默认不变速、不加 BGM。需要音效时仅在转场添加轻量音效，不盖人声；未采用音效时直接复用剪后原声。以下示例是采用音效的路径：
 
 ```bash
 ffmpeg -i base/base-clean.mp4 -vn -ac 2 -ar 48000 -c:a pcm_s24le out/voice.wav
@@ -300,17 +303,8 @@ ffmpeg -i out/final-silent.mp4 -i out/mix.wav \
 scripts/qa.sh out/final.mp4 qa
 ```
 
-逐项对照 `references/qa-checklist.md`。交付目录：
+逐项对照 `references/qa-checklist.md`，并完成 [交付与 HTML 修改器](delivery-and-editor.md) 的目录和真实浏览器验收。每版都要有 MP4、对应 HTML 修改器及依赖、SRT、封面、约定的原生草稿、人员确认和验收记录。
 
-```text
-交付/<任务名>/
-├── <任务名>.mp4
-├── 字幕.srt
-├── 封面.png
-├── 画面抽查.png
-├── 本次人员确认.json
-├── 人员确认记录.md
-└── 剪辑说明.md
-```
+HTML 中的所有后加文字、水印文字、卡片文案和字幕必须独立可改；使用本版干净底片与最终音轨。实际修改、保存重开、导出带音频视频并验证后，才能更新 `delivery-checklist.json` 对应项。只运行本节的 `qa.sh` 不能证明 HTML 或剪映草稿完成。
 
-剪辑说明必须写清：剪口、包装、人物条、美颜是原生还是软件近似、已验证项、未完成项。
+剪辑说明必须写清：剪口、包装、人物条、美颜是原生还是软件近似、修改器浏览器和打开方式、已验证项、未完成项。原生部分按 [原生交接](native-handoff.md) 验证，缺少依赖保持未完成。

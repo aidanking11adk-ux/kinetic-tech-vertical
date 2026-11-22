@@ -17,6 +17,10 @@ mkdir -p "$PROJECT/assets" "$PROJECT/out" "$PROJECT/base"
 for f in index.html style.css app.js audio.py; do
   cp "$TEMPLATE/$f" "$PROJECT/$f"
 done
+# Never reset an existing project's acceptance record when refreshing templates.
+if [[ ! -e "$PROJECT/delivery-checklist.json" ]]; then
+  cp "$SKILL_DIR/templates/delivery-checklist.json" "$PROJECT/delivery-checklist.json"
+fi
 for f in NotoSansSC.ttf Geist-normal-600.woff2 Geist-normal-700.woff2 \
          GeistMono-normal-400.woff2 GeistMono-normal-500.woff2 \
          grain.png logo.png logo-crop.png; do
@@ -80,6 +84,7 @@ echo "$PROJECT_ABS"
 echo "template: index.html, style.css, app.js, audio.py"
 echo "assets:   assets/NotoSansSC.ttf, Geist*, grain.png, logo*.png (placeholder)"
 echo "config:   project.json (frames placeholder: 1477)"
+echo "delivery: delivery-checklist.json (all pending; not acceptance proof)"
 
 if command -v npm >/dev/null 2>&1; then
   echo "=== npm: playwright-core ==="
@@ -97,4 +102,7 @@ cat <<'TXT'
 5. replace the placeholder logo.png / logo-crop.png with the firm's own assets
 6. replace the example title/cards/subtitles in index.html + app.js
 7. render: node scripts/render.mjs --project <project>/project.json
+8. read references/delivery-and-editor.md; build a matching HTML editor with editable text and audio-video export (the example index.html is a renderer, not an editor)
+9. complete native draft/beauty handoff per references/native-handoff.md; record any missing dependencies
+10. test editing, saving/reopening HTML and exporting with audio; verify the actual outputs before completing delivery-checklist.json
 TXT

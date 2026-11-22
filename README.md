@@ -1,6 +1,10 @@
 # kinetic-tech-vertical
 
-把律所竖屏口播原片做成 Kinetic Tech（酷炫科技风）1080×1920 成片；处理 HDR/HLG→SDR、语义剪口、科技感字幕、人名条、整屏卡片、戴眼镜/眼袋的眼下局部修饰与片尾，并完成渲染、混音和验收。当用户提供一条律所竖屏口播原片，要求按文案剪成 45–55 秒、保留律师出镜和原声、使用 Kinetic Tech 包装时使用；不适用于横屏、多机位或需要剪映原生草稿的任务。
+把律师知识口播原片做成 Kinetic Tech（科技风）1080×1920 成片，保留律师出镜和原声，按语义精剪，添加标题、字幕、人名条及内容对应的整屏动画。片长服从完整意思，不固定为 45–55 秒。
+
+**2026-11-22 标准：每版同时交付 MP4 和匹配的 HTML 视频修改器。**后加文字、水印文字和字幕必须独立可编辑，支持改文字、字体、字号、颜色和字幕时间，并实际验证保存重开及带音频视频导出。不是只提供一个预览页面或 SRT。
+
+原生剪映草稿和八项皮肤管理另需剪映及可用的原生工具；本包不内置后端，也不把软件近似当作原生完成。完整清单见 [交付标准](skills/kinetic-tech-vertical/references/delivery-and-editor.md) 和 [原生交接](skills/kinetic-tech-vertical/references/native-handoff.md)。
 
 ## 安装
 
@@ -9,12 +13,13 @@ npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 ```
 
 更完整的依赖、素材和第一条片流程见 [INSTALL.md](INSTALL.md)。
+已有安装可重新执行上面的命令，按安装器提示更新，并新开客户端会话。确认安装后的 `SKILL.md` 显示 `2026-11-22` 标准以及 `references/delivery-and-editor.md`；先备份自己改过的技能文件。
 
 ## 使用
 
 安装后，可以这样开始：
 
-> 使用 $kinetic-tech-vertical 把这条律所口播原片剪成 Kinetic Tech 竖屏成片，并完成抽帧和音频验收。
+> 使用 $kinetic-tech-vertical 按律师口播标准剪辑本次素材。先确认人员信息，不加滤镜，不等粗剪确认，每条添加与内容对应的整屏动画。交付 MP4、匹配的 HTML 视频修改器及约定的原生草稿；实际测试改字、改字幕时间、保存重开和带音频导出。依赖不足请列出未完成项，不能只交成片就宣布完成。
 
 ## 运行依赖
 
@@ -25,6 +30,8 @@ npx -y skills add aidanking11adk-ux/kinetic-tech-vertical -g --all
 - Python + OpenCV + numpy（戴眼镜/眼袋的眼下局部修饰）
 - uv（可选，用于运行 `audio.py` 混音）
 - 运行时素材：`assets/runtime/` 已包含字体、颗粒和占位 Logo；发布前替换成律所自己的 Logo
+- HTML 修改器：执行者基于本版包装工程制作并验证；现有渲染示例不是现成编辑器。使用的浏览器、导出库或本地服务须随交付说明和依赖一起提供
+- 原生草稿/美颜：另配合法安装的剪映和 Computer Use，或匹配版本的 Headless/原生技能；安装本 Skill 不等于原生环境已就绪
 
 ## 隐私
 
